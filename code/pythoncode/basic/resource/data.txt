@@ -1,0 +1,3 @@
+Sample data warehouse
+Enhanced slowly changing
+Recommended best practices
