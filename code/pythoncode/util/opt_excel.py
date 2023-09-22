@@ -1,12 +1,12 @@
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # Name:         opt_excel
 # Description:  使用python操作excel
 # Date:         2022.03.28
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 
 import time
-import xlwt,xlrd
+import xlwt, xlrd
 from xlutils.copy import copy
 
 INPUT_PATH = "data/in.xls"
@@ -30,19 +30,19 @@ print("载入 basci_info --> %s " % flag)
 print("--------------------------- 操作行 ---------------------------")
 
 nrows = sheet1.nrows
-print("sheet1 的总行数为：%d" %nrows)
+print("sheet1 的总行数为：%d" % nrows)
 # sheet1 的总行数为：8
 
 print("第二行的所有单元格的内容为： %s " % sheet1.row(1))  # 索引从0开始
 # 第二行的所有单元格的内容为 [text:'A', text:'male', number:15.0, text:'student']
 
-print("第二行的第一列到第二列单元格的内容为： %s " % sheet1.row_slice(1,start_colx = 0,end_colx = 2))
+print("第二行的第一列到第二列单元格的内容为： %s " % sheet1.row_slice(1, start_colx=0, end_colx=2))
 # 第二行的第一列到第三列单元格的内容为 [text:'A', text:'male']
 
-print("第二行的第一列到第二列单元格的类型为： %s " % sheet1.row_types(1,start_colx = 0,end_colx = 2))
+print("第二行的第一列到第二列单元格的类型为： %s " % sheet1.row_types(1, start_colx=0, end_colx=2))
 # 第二行的第一列到第二列单元格的类型为： array('B', [1, 1])
 
-print("第二行的第一列到第二列单元格的值为： %s " % sheet1.row_values(1,start_colx = 0,end_colx = 2))
+print("第二行的第一列到第二列单元格的值为： %s " % sheet1.row_values(1, start_colx=0, end_colx=2))
 # 第二行的第一列到第二列单元格的值为： ['A', 'male']
 
 print("第二行共有 %d 个单元格 " % sheet1.row_len(1))
@@ -51,7 +51,7 @@ print("第二行共有 %d 个单元格 " % sheet1.row_len(1))
 print("--------------------------- 操作列 ---------------------------")
 
 ncols = sheet1.ncols
-print("sheet1 的总列数为：%d" %ncols)
+print("sheet1 的总列数为：%d" % ncols)
 # sheet1 的总列数为：4
 
 print("第一列的第一行到第二行的单元格的内容为： %s " % sheet1.col(0, start_rowx=0, end_rowx=2))  # 索引从0开始
@@ -69,12 +69,11 @@ print("第一列的第一行到第二行的单元格的值为： %s " % sheet1.c
 
 print("--------------------------- 操作单元格 ---------------------------")
 
+print("单元格(1,0)的内容为 %s " % sheet1.cell(1, 0))
 
-print("单元格(1,0)的内容为 %s " % sheet1.cell(1,0))
+print("单元格(1,0)的类型为 %s " % sheet1.cell_type(1, 0))
 
-print("单元格(1,0)的类型为 %s " % sheet1.cell_type(1,0))
-
-print("单元格(1,0)的值为 %s " % sheet1.cell_value(1,0))
+print("单元格(1,0)的值为 %s " % sheet1.cell_value(1, 0))
 
 print("--------------------------- 追加写入 ---------------------------")
 
@@ -106,10 +105,10 @@ worksheet = workbook.add_sheet('Sheet1')
 print("--------------------------- 写入公式 ---------------------------")
 
 worksheet2 = workbook.add_sheet('Sheet2')
-worksheet2.write(0,0, 4)
-worksheet2.write(0,1, 5)
-worksheet2.write(1,0,xlwt.Formula('A1*B1'))
-worksheet2.write(1,1,xlwt.Formula('A1+B1'))
+worksheet2.write(0, 0, 4)
+worksheet2.write(0, 1, 5)
+worksheet2.write(1, 0, xlwt.Formula('A1*B1'))
+worksheet2.write(1, 1, xlwt.Formula('A1+B1'))
 workbook.save("resource/out.xls")
 print("公式写入成功....")
 
