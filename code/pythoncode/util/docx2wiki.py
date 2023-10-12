@@ -1,7 +1,9 @@
 # -----------------------------------------------------
 # Name: docx2wiki
-# Description: 使用 PANDOC 进行批量转换【DOCX -> WIKI页面】
-# Date: 2023.09.21
+# Description: 使用 PANDOC 批量转换 WORD 文档，
+#              然后批量导入 MEDIAWIKI 系统。
+#              【DOCX -> WIKI页面 -> MEDIAWIKI系统】
+# Date: 2023.10.12
 # ------------------------------------------------------
 import os
 import sys
@@ -41,6 +43,20 @@ def main():
 
         print(f"----------- 完成转换 {docx} -----------")
     print("=================== 转换完成 ===================")
+
+    print("=================== 导入开始 ===================")
+
+    items = os.listdir(out_dir)
+    # 检查输入
+    if len(items) == 0:
+        raise Exception("请检查 output 目录是否有文件")
+    for item in items:
+        if item.split(".")[-1] != "wiki":
+            raise Exception(f"output 目录下的 {item} 文件不是 wiki 文件")
+
+    os.system(f"php maintenance/importTextFiles.php --overwrite --use-timestamp {out_dir}\\*.wiki")
+
+    print("=================== 导入完成 ===================")
 
 
 if __name__ == "__main__":
